@@ -14,6 +14,11 @@ const createRectangle = (mouseX, mouseY) => {
         selectObject(rect);
     });
 
+    rect.addEventListener('contextmenu', (ecent) => {
+        event.preventDefault();
+        createObjectMenu(rect);
+    });
+
     document.body.appendChild(rect);
 };
 

@@ -69,19 +69,38 @@ const createSelector = () => {
     });
     moveButton.innerText = '✥';
 
-    moveButton.addEventListener('mousedown', (event) => {
-        document.addEventListener('mousemove', moveObject(event));
+    moveButton.addEventListener('mousedown', () => {
+        moveHandler = (e) => moveObject(e);
+        document.addEventListener('mousemove', moveHandler);
     });
-    document.addEventListener('mouseup', () => {
-        removeEventListener('mousemove', moveObject);
+    moveButton.addEventListener('mouseup', () => {
+        document.removeEventListener('mousemove', moveHandler);
+        moveHandler = null;
     });
 
-    rightBar.addEventListener('mousedown', (event) => {
-        resizeRight.startX = event.clientX;
-        document.addEventListener('mousemove', resizeRight);
+    rightBar.addEventListener('mousedown', () => {
+        moveHandler = (e) => resizeRight(e);
+        document.addEventListener('mousemove', moveHandler);
     });
+
+    leftBar.addEventListener('mousedown', () => {
+        moveHandler = (e) => resizeLeft(e);
+        document.addEventListener('mousemove', moveHandler);
+    });
+
+    bottomBar.addEventListener('mousedown', () => {
+        moveHandler = (e) => resizeBottom(e);
+        document.addEventListener('mousemove', moveHandler);
+    });
+
+    topBar.addEventListener('mousedown', () => {
+        moveHandler = (e) => resizeTop(e);
+        document.addEventListener('mousemove', moveHandler);
+    });
+    
     document.addEventListener('mouseup', () => {
-        removeEventListener('mousemove', resizeRight);
+        document.removeEventListener('mousemove', moveHandler);
+        moveHandler = null;
     });
 
     selectorObject.appendChild(leftBar);
@@ -107,13 +126,14 @@ const selectObject = (element) => {
     });
 };
 
-const moveObject = (event, param) => {
+const moveObject = (event) => {
     if (activeElement) {
-        console.log(param);
-        const newX = event.clientX - (param.clientX - selectorObject.getBoundingClientRect().left);
-        const newY = event.clientY - (param.clientY - selectorObject.getBoundingClientRect().top);
-        activeElement.style.left = `${newX}px`;
-        activeElement.style.top = `${newY}px`;
+        const newX = event.clientX;
+        const newY = event.clientY;
+        Object.assign(activeElement.style, {
+            left: `${newX}px`,
+            top: `${newY}px`,
+        });
         Object.assign(selector.style, {
             left: `${newX}px`,
             top: `${newY}px`,
@@ -121,10 +141,42 @@ const moveObject = (event, param) => {
     }    
 };
 
-const resizeRight = () => {
-    if (activeElement && mouseDown) {
-        const newWidth = event.clientX - activeElement.getBoundingClientRect().left;
+const resizeRight = (event) => {
+    if (activeElement) {
+        const newWidth = event.clientX - activeElement.getBoundingClientRect().left + 2;
         activeElement.style.width = `${newWidth}px`;
         selector.style.width = `${newWidth}px`;
+    }
+};
+
+const resizeLeft = (event) => {
+    if (activeElement) {
+        const rect = activeElement.getBoundingClientRect();
+        const newWidth = rect.right - event.clientX;
+        const newLeft = event.clientX;
+        activeElement.style.width = `${newWidth}px`;
+        activeElement.style.left = `${newLeft}px`;
+        selector.style.width = `${newWidth}px`;
+        selector.style.left = `${newLeft}px`;
+    }
+};
+
+const resizeBottom = (event) => {
+    if (activeElement) {
+        const newHeight = event.clientY - activeElement.getBoundingClientRect().top + 2;
+        activeElement.style.height = `${newHeight}px`;
+        selector.style.height = `${newHeight}px`;
+    }
+};
+
+const resizeTop = (event) => {
+    if (activeElement) {
+        const rect = activeElement.getBoundingClientRect();
+        const newHeight = rect.bottom - event.clientY;
+        const newTop = event.clientY;
+        activeElement.style.height = `${newHeight}px`;
+        activeElement.style.top = `${newTop}px`;
+        selector.style.height = `${newHeight}px`;
+        selector.style.top = `${newTop}px`;
     }
 };
