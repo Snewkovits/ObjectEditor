@@ -7,7 +7,7 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
-#context-menu {
+#menu {
     position: absolute;
     width: 150px;
     background-color: #f9f9f9;
@@ -16,14 +16,14 @@
     border-radius: 5px;
 }
 
-#context-menu>div {
+#menu>div {
     padding: 5px;
     cursor: pointer;
 
     transition: background-color 0.2s ease-in-out;
 }
 
-#context-menu>div:hover {
+#menu>div:hover {
     background-color: #e0e0e0;
 }
 

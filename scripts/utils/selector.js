@@ -4,7 +4,7 @@ const createSelector = () => {
     Object.assign(selectorObject.style, {
         position: 'absolute',
         display: 'none',
-        zIndex: '1000',
+        zIndex: '998',
         transition: 'left 0.1s, top 0.1s, width 0.1s, height 0.1s',
     });
     selectorObject.addEventListener('click', () => {

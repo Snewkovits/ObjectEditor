@@ -10,6 +10,8 @@ const menuElements = {
 }
 
 const createContextMenu = () => {
+    if (activeElement) return;
+
     const mouseX = mousePosition.x;
     const mouseY = mousePosition.y;
 
@@ -21,8 +23,9 @@ const createContextMenu = () => {
     Object.assign(menu.style, {
         left: `${mouseX}px`,
         top: `${mouseY}px`,
+        zIndex: '999',
     })
-    menu.id = 'context-menu';
+    menu.id = 'menu';
 
     for (const key in menuElements) {
         const item = document.createElement('div');

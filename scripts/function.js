@@ -12,6 +12,7 @@ document.addEventListener('click', () => {
 document.addEventListener('contextmenu', (event) => {
     event.preventDefault();
     createContextMenu();
+    createObjectMenu();
 });
 
 document.addEventListener('DOMContentLoaded', () => {

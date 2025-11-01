@@ -1,6 +1,6 @@
 const createRectangle = (mouseX, mouseY) => {
-    const rect = document.createElement('div');
-    Object.assign(rect.style, {
+    const element = document.createElement('div');
+    Object.assign(element.style, {
         position: 'absolute',
         left: `${mousePosition.x}px`,
         top: `${mousePosition.y}px`,
@@ -10,21 +10,16 @@ const createRectangle = (mouseX, mouseY) => {
         transition: 'all 0.1s',
     });
 
-    rect.addEventListener('click', () => {
-        selectObject(rect);
+    element.addEventListener('click', () => {
+        selectObject(element);
     });
 
-    rect.addEventListener('contextmenu', (ecent) => {
-        event.preventDefault();
-        createObjectMenu(rect);
-    });
-
-    document.body.appendChild(rect);
+    document.body.appendChild(element);
 };
 
 const createCircle = (mouseX, mouseY) => {
-    const circle = document.createElement('div');
-    Object.assign(circle.style, {
+    const element = document.createElement('div');
+    Object.assign(element.style, {
         position: 'absolute',
         left: `${mousePosition.x}px`,
         top: `${mousePosition.y}px`,
@@ -34,9 +29,9 @@ const createCircle = (mouseX, mouseY) => {
         borderRadius: '50%',
         transition: 'all 0.1s',
     });
-    circle.addEventListener('click', () => {
-        selectObject(circle);
+    element.addEventListener('click', () => {
+        selectObject(element);
     });
 
-    document.body.appendChild(circle);
+    document.body.appendChild(element);
 };
