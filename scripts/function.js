@@ -3,18 +3,28 @@ document.addEventListener('mousemove', (event) => {
 });
 
 document.addEventListener('click', () => {
-    if (contextMenu) {
-        contextMenu.remove();
-        contextMenu = null;
-    }
+    removeAllMenu();
 });
 
 document.addEventListener('contextmenu', (event) => {
     event.preventDefault();
-    createContextMenu();
-    createObjectMenu();
+    if (activeElement) {
+        createMenu({ x: event.clientX, y: event.clientY }, selectorMenu);
+    } else {
+        createMenu({ x: event.clientX, y: event.clientY }, defaultMenu);
+    }
 });
 
 document.addEventListener('DOMContentLoaded', () => {
     createSelector();
 });
+
+const removeAllMenu = () => {
+    if (contextMenu) {
+        contextMenu.remove();
+        contextMenu = null;
+        for (const subMenu of subMenus) {
+            subMenu.remove();
+        }
+    }
+};

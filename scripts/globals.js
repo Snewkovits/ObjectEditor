@@ -1,5 +1,6 @@
 let activeElement = null;
 let contextMenu = null;
+let subMenus = [];
 
 let selector = null;
 

@@ -180,3 +180,17 @@ const resizeTop = (event) => {
         selector.style.top = `${newTop}px`;
     }
 };
+
+const deleteSelectedObject = () => {
+    if (activeElement) {
+        activeElement.remove();
+        activeElement = null;
+        selector.style.display = 'none';
+    }
+};
+
+const changeColorActiveElement = (color) => {
+    if (activeElement) {
+        activeElement.style.backgroundColor = color;
+    }
+};
