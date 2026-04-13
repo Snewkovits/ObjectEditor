@@ -28,7 +28,8 @@ Nyisd meg az index.html fájlt bármely modern böngészőben (Chrome, Firefox, 
 
 Kész! Nincs telepítés vagy szerver indítása szükséges.
 # Projekt szerkezet
-textObjectEditor/
+```
+ObjectEditor/
 ├── index.html          # Fő oldal
 ├── style.css           # Stílusok
 ├── scripts/            # JavaScript fájlok
@@ -37,7 +38,8 @@ textObjectEditor/
 │   └── utils.js
 ├── README.md
 └── (további fájlok...)
-> Fejlesztés
+```
+# Fejlesztés
 A projekt teljesen önállóan fut a böngészőben.
 Szerkesztéshez csak egy szövegszerkesztő szükséges.
 # 🤝 Hozzájárulás
